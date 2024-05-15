@@ -10,6 +10,15 @@ import * as fs from 'fs'
   const content = decoder.decode(data)
   const stream = fs.createWriteStream(path.join(import.meta.dirname, 'result.csv'))
   const re = /^.*?║\s*?(\d+)\s*?│\s*?(.?)\s*?│\s*?(.+?)\s*?│\s*?(\d+)\s*?║\s*?(\d+)\s*?│\s*?(\d+)\s*?│\s*?(\d+(?:\.\d+))\s*?║/
+  stream.write([
+    '字頻序號',
+    '字',
+    '部首',
+    '筆畫',
+    '出現頻次',
+    '累積頻次',
+    '累積百分比',
+  ].join(',') + '\n')
   content.split('\n').forEach(line => {
     const match = re.exec(line)
     if (match) {
